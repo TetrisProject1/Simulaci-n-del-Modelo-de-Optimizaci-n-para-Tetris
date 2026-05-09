@@ -5,7 +5,7 @@ import copy
 ROWS = 20
 COLS = 10
 
-# Piezas
+# Definir las piezas y sus rotaciones
 PIECES = {
     "I": [
         [[1,1,1,1]],
@@ -84,9 +84,11 @@ PIECES = {
     ]
 }
 
+#Crea un tablero vacío de Tetris de 20 filas por 10 columnas.
 def create_board():
     return [[0]*COLS for _ in range(ROWS)]
 
+#Verifica si una pieza puede colocarse en cierta posición sin salir del tablero ni chocar con otros bloques.
 def can_place(board, shape, row, col):
     for i in range(len(shape)):
         for j in range(len(shape[0])):
@@ -95,7 +97,7 @@ def can_place(board, shape, row, col):
                     return False
     return True
 
-
+#Coloca una pieza en la posición más baja posible de una columna y actualiza el tablero.
 def place_piece(board, shape, col):
     new_board = copy.deepcopy(board)
 
@@ -116,6 +118,7 @@ def place_piece(board, shape, col):
 
     return clear_lines(new_board)
 
+#Elimina líneas completas y agrega nuevas filas vacías en la parte superior.
 def clear_lines(board):
     new_board = [row for row in board if not all(cell == 1 for cell in row)]
     lines_cleared = ROWS - len(new_board)
@@ -125,6 +128,7 @@ def clear_lines(board):
     
     return new_board, lines_cleared
 
+#Calcula la altura máxima alcanzada por las piezas en el tablero.
 def altura_max(board):
     heights = []
     for col in range(COLS):
@@ -136,7 +140,7 @@ def altura_max(board):
         heights.append(h)
     return max(heights)
 
-
+#Cuenta los huecos vacíos que quedan debajo de bloques ya colocados.
 def huecos(board):
     holes = 0
     for col in range(COLS):
@@ -148,7 +152,7 @@ def huecos(board):
                 holes += 1
     return holes
 
-
+#Mide qué tan irregular es el tablero comparando diferencias de altura entre columnas.
 def irregularidad(board):
     heights = []
     for col in range(COLS):
@@ -160,6 +164,7 @@ def irregularidad(board):
         heights.append(h)
     return sum(abs(heights[i]-heights[i+1]) for i in range(len(heights)-1))
 
+#Selecciona las mejores posiciones iniciales según el modelo simple.
 def get_top_candidates(board, piece, top_n=3):
     candidates = []
 
@@ -176,6 +181,7 @@ def get_top_candidates(board, piece, top_n=3):
     candidates.sort(key=lambda x: x[2], reverse=True)
     return candidates[:top_n]
 
+#Función matemática que asigna un puntaje a un tablero según altura, huecos, irregularidad y líneas completadas.
 def score_simple(board, lines):
     H = altura_max(board)
     B = huecos(board)
@@ -183,6 +189,7 @@ def score_simple(board, lines):
     
     return -H - 2*B + 5*lines - 0.5*A
 
+#Genera todas las posiciones posibles para una pieza y sus rotaciones.
 def get_positions(piece_shapes):
     positions = []
 
@@ -196,6 +203,7 @@ def get_positions(piece_shapes):
 
     return positions
 
+#Evalúa recursivamente futuras piezas para predecir mejores decisiones.
 def recursive_lookahead(board, pieces, depth):
     if depth == 0 or len(pieces) == 0:
         return score_simple(board, 0)
@@ -226,6 +234,7 @@ def recursive_lookahead(board, pieces, depth):
 
     return best_score
 
+#Versión optimizada del lookahead que reduce cálculos usando filtros de mejores candidatos.
 def recursive_optimized(board, pieces, depth, top_n=3):
 
     if depth == 0 or len(pieces) == 0:
@@ -269,6 +278,7 @@ def recursive_optimized(board, pieces, depth, top_n=3):
 
     return best_score
 
+#Encuentra la mejor posición considerando únicamente la pieza actual.
 def best_move_simple(board, piece):
     best = None
     best_score_val = -float('inf')
@@ -287,6 +297,7 @@ def best_move_simple(board, piece):
 
     return best
 
+#Encuentra la mejor posición considerando futuras piezas visibles.
 def best_move_lookahead(board, pieces):
     best = None
     best_score_val = -float('inf')
@@ -317,7 +328,8 @@ def best_move_lookahead(board, pieces):
             best = (new_board, lines)
 
     return best
-    
+
+#Encuentra la mejor posición usando predicción y filtros para acelerar cálculos.
 def best_move_optimized(board, pieces):
 
     best = None
@@ -348,6 +360,7 @@ def best_move_optimized(board, pieces):
 
     return best
 
+#Ejecuta una simulación completa utilizando un modelo específico.
 def run_simulation(model_func, pieces_sequence):
 
     board = create_board()
@@ -369,6 +382,7 @@ def run_simulation(model_func, pieces_sequence):
 
     return board, total_lines
 
+#Corre los experimentos para comparar los tres modelos y mostrar resultados.
 def experiment():
     pieces_sequence = [random.choice(list(PIECES.keys())) for _ in range(1000)]
 
