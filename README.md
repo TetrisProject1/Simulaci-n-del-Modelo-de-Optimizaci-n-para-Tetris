@@ -17,6 +17,7 @@ El programa utiliza tres versiones del modelo:
   
   Evalúa la pieza actual y las siguientes tres piezas visibles, utilizando filtros para reducir la cantidad de cálculos necesarios.
 
+
 Los modelos buscan maximizar:
 
 -Líneas completadas (L)
@@ -65,15 +66,18 @@ Cantidad de piezas:
 Modificar el número dentro del paréntesis al final en:
 pieces_sequence = [random.choice(list(PIECES.keys())) for _ in range(1000)]
 
+
 Semillas utilizadas:
 
 Modificar los números en (cada número representa una semilla única):
 for seed in [1,2,3,4,5...]
 
+
 Cantidad de piezas futuras que considera el modelo optimizado:
 
 Modificar el número en:
 top_n=3
+
 
 Cantidad de piezas futuras que considera el modelo a futuro:
 
