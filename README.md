@@ -8,10 +8,12 @@ El programa utiliza tres versiones del modelo:
 1. Simple
 
   Evalúa únicamente la pieza actual.
-3. Futuro
+
+2. Futuro
   
   Evalúa la pieza actual y las siguientes dos piezas visibles.
-4. Optimizado
+
+3. Optimizado
   
   Evalúa la pieza actual y las siguientes tres piezas visibles, utilizando filtros para reducir la cantidad de cálculos necesarios.
 
