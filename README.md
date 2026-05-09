@@ -19,7 +19,9 @@ Y minimizar:
 -Altura máxima (H)
 -Huecos (O)
 -Irregularidad del tablero (I)
----------------------------------------------------
+
+-----------------------------------
+
 Cómo usar el programa:
 
 1. Ejecutar el archivo de Python.
@@ -36,7 +38,8 @@ Los resultados incluyen:
 
 --Es importante tomar en cuenta que el tiempo de ejecución varía dependiendo de las capacidades de tu computadora--
 
-----------------------------------------------------
+-----------------------------------
+
 Cómo cambiar experimentos:
 
 Cantidad de piezas:
@@ -54,7 +57,9 @@ top_n=3
 Cantidad de piezas futuras que considera el modelo a futuro:
 Modificar el número en:
 depth=2
----------------------------------------------------------
+
+-----------------------------------
+
 Requisitos:
 -Python 3
 -Librerías utilizadas:
@@ -63,6 +68,7 @@ Requisitos:
     -copy
 
 No se requieren librerías externas.
+
 ---------------------------------------------------------
 
 Autor:
