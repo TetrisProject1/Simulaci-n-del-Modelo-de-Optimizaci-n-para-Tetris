@@ -1,16 +1,18 @@
 Tetris Optimización con Modelos - Exploración Matemática
 
 Descripcion:
-Este programa simula distintas versiones de un modelo matemático para determinar la mejor posición posible para colocar piezas en Tetris.
-El objetivo es comparar qué tan efectivos y rápidos son diferentes métodos de decisión.
+Este programa simula distintas versiones de un modelo matemático para determinar la mejor posición posible para colocar piezas en Tetris. El objetivo es comparar qué tan efectivos y rápidos son diferentes métodos de decisión.
 
 El programa utiliza tres versiones del modelo:
 
 1. Simple
+
   Evalúa únicamente la pieza actual.
-2. Futuro
+3. Futuro
+  
   Evalúa la pieza actual y las siguientes dos piezas visibles.
-3. Optimizado
+4. Optimizado
+  
   Evalúa la pieza actual y las siguientes tres piezas visibles, utilizando filtros para reducir la cantidad de cálculos necesarios.
 
 Los modelos buscan maximizar:
@@ -82,8 +84,11 @@ Requisitos:
 -Python 3
 
 -Librerías utilizadas:
+   
     -random
+    
     -time
+    
     -copy
 
 No se requieren librerías externas.
